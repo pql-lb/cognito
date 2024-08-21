@@ -1,6 +1,7 @@
-import { formatPrice } from "../../utils/format";
+import React, { useContext, useEffect, useState } from "react";
 import { ProductCard } from "./ProductCard";
-export const List = ({ products }) => {
+
+export const List = React.memo(({ products }) => {
     return (
         <div className="list">
             {products.map((product) => {
@@ -8,4 +9,4 @@ export const List = ({ products }) => {
             })}
         </div>
     );
-};
+});

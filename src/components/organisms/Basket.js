@@ -1,18 +1,39 @@
 import React, { useCallback, useContext } from "react";
-import { BasketContext, BasketDispatchContext } from "../../context/basket";
+import {
+    BasketContext,
+    BasketDispatchContext,
+    actionTypes,
+} from "../../context/basket";
+import { BasketItem } from "../molecules/BasketItem";
 export const Basket = React.memo(() => {
     const dispatch = useContext(BasketDispatchContext);
-    const { open } = useContext(BasketContext);
+    const { open, cart } = useContext(BasketContext);
     const handleBasket = () => {
-        dispatch({ type: "OPEN", payload: !open });
+        dispatch({ type: actionTypes.OPEN, payload: !open });
     };
 
     return (
         <>
             <div>
-                <button onClick={handleBasket}>Basket</button>
+                <button data-testid="cart" onClick={handleBasket}>
+                    Basket
+                </button>
             </div>
-            {open && <aside>List of basket items</aside>}
+            {open && (
+                <aside role="aside">
+                    <div>
+                        {cart.length &&
+                            cart.map((item) => {
+                                return (
+                                    <BasketItem
+                                        key={"cart" + item.id}
+                                        product={item}
+                                    />
+                                );
+                            })}
+                    </div>
+                </aside>
+            )}
         </>
     );
 });

@@ -8,10 +8,10 @@ import { BasketProvider } from "./context/basket";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <ProductsProvider>
-            <BasketProvider>
+        <BasketProvider>
+            <ProductsProvider>
                 <RoutesComponent />
-            </BasketProvider>
-        </ProductsProvider>
+            </ProductsProvider>
+        </BasketProvider>
     </React.StrictMode>
 );
