@@ -16,7 +16,7 @@ import { List } from "../molecules/List";
 //     }
 // }, [filter]);
 export const ProductList = React.memo(({ products }) => {
-    const [postsState, setPostsState] = useState([]);
+    const [productsState, setProductsState] = useState([]);
     const [cursor, setCursor] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
@@ -28,14 +28,14 @@ export const ProductList = React.memo(({ products }) => {
         const nextCursor = cursor + PAGE_SIZE;
         const splitArr = products.slice(cursor, nextCursor);
 
-        setPostsState((prevPosts) => [...prevPosts, ...splitArr]);
+        setProductsState((prevPosts) => [...prevPosts, ...splitArr]);
         setCursor(nextCursor);
         if (nextCursor >= products.length) {
             setHasMore(false);
         }
 
         setIsLoading(false);
-    }, [cursor, products, postsState, hasMore]);
+    }, [cursor, products, productsState, hasMore]);
 
     const handleScroll = () => {
         const scrollThreshold = 5;
@@ -65,11 +65,11 @@ export const ProductList = React.memo(({ products }) => {
 
     return (
         <>
-            <List posts={postsState} />
+            <List products={productsState} />
             {isLoading && <div>Loading...</div>}
             {!hasMore && (
                 <p className="text-text opacity-50 text-center text-sm">
-                    End of posts.
+                    End of products.
                 </p>
             )}
         </>
