@@ -4,6 +4,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { actionTypes } from "../../src/context/basket";
 import { Basket } from "../components/organisms/Basket";
 import { MockBasketProvider, mockDispatch, state } from "./setupTests";
+import { Aside } from "../components/organisms/Aside";
 
 describe("Basket Open Button", () => {
     test("cart open state correctly executed", async () => {
@@ -43,6 +44,7 @@ describe("Basket Item Component", () => {
         rerender(
             <MockBasketProvider state={updatedState}>
                 <Basket />
+                <Aside />
             </MockBasketProvider>
         );
 

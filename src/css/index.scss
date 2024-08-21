@@ -1,5 +1,91 @@
+$wrapperMaxWidth: 1200px;
+$wrapperWidth: 90%;
+$headerHeight: 60px;
+
+main {
+    position: relative;
+}
+body {
+    overflow-x: hidden;
+}
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: $headerHeight;
+    z-index: 30;
+    display: block;
+    &__nav {
+        max-width: $wrapperMaxWidth;
+        width: $wrapperWidth;
+        margin: auto;
+    }
+    &__list {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+    &__item {
+        position: relative;
+        list-style: none;
+        padding: 0.5rem 1rem;
+    }
+}
+
+.aside {
+    position: absolute;
+    z-index: 20;
+    right: 0;
+    top: 0;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.9);
+    width: 360px;
+    height: 100vh;
+    transform: translateX(400px);
+    transition: transform 0.4s ease;
+    &--active {
+        transform: translateX(0%);
+    }
+    &__inner {
+        padding: 5rem 1rem;
+        height: 100%;
+        max-height: calc(100vh - 10rem);
+        overflow-y: auto;
+    }
+    &__item {
+        padding: 0 0 1rem 0;
+        margin: 0 0 1rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    }
+    &__delete {
+    }
+    &__title {
+    }
+    &__price {
+    }
+    &__quantity {
+    }
+    &__input {
+    }
+    &__change {
+    }
+}
+
 .list {
+    display: grid;
+    padding-top: 2rem;
+    margin-top: $headerHeight;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
     &__item {
         margin-bottom: 50px;
+    }
+    &__title {
+    }
+    &__description {
+    }
+    &__price {
+    }
+    &__cart {
     }
 }

@@ -20,7 +20,7 @@ export const ProductList = React.memo(({ products }) => {
     const [cursor, setCursor] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
-    const PAGE_SIZE = 25;
+    const PAGE_SIZE = 24;
 
     const fetchPosts = useCallback(async () => {
         if (!hasMore) return;
