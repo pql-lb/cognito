@@ -5,6 +5,7 @@ import {
     actionTypes,
 } from "../context/products";
 
+//Fetches the products to display on the products page
 const UseProducts = () => {
     const ctx = useContext(ProductsContext);
     const { products, loading, error } = ctx;

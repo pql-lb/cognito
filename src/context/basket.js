@@ -73,6 +73,7 @@ const reducer = (state, action) => {
 export const BasketContext = createContext({ state: { ...initialState } });
 export const BasketDispatchContext = createContext(null);
 
+//All cart state stored here, used context API due to small size of project, for larger projects would use redux
 export const BasketProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
