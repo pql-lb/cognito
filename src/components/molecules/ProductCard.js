@@ -4,7 +4,7 @@ import { BasketDispatchContext, actionTypes } from "../../context/basket";
 import { Button } from "../atoms/Button";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ product, className }) => {
+const ProductCard = React.memo(({ product, className, truncuate }) => {
     const { id, name, description, price } = product;
     const dispatch = useContext(BasketDispatchContext);
 
@@ -20,7 +20,13 @@ const ProductCard = ({ product, className }) => {
             className={`${className ? className : ""} list__item`}
         >
             <h2 className="list__title">{name}</h2>
-            <p className="list__description">{description}</p>
+            <p
+                className={`list__description ${
+                    truncuate ? "list__description--t" : ""
+                }`}
+            >
+                {description}
+            </p>
             <p className="list__price">{formatPrice(price)}</p>
             <div className="list__buttons">
                 <Link to={`/product/${product.id}`}>View More</Link>
@@ -32,6 +38,6 @@ const ProductCard = ({ product, className }) => {
             </div>
         </div>
     );
-};
+});
 
 export default ProductCard;

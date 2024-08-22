@@ -5,7 +5,13 @@ const List = React.memo(({ products }) => {
     return (
         <div className="list">
             {products.map((product) => {
-                return <ProductCard key={product.id} product={product} />;
+                return (
+                    <ProductCard
+                        truncuate={true}
+                        key={product.id}
+                        product={product}
+                    />
+                );
             })}
         </div>
     );
