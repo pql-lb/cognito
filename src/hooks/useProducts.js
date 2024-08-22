@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from "react";
+import { startTransition, useCallback, useContext, useEffect } from "react";
 import {
     ProductsContext,
     ProductsDispatchContext,
@@ -13,19 +13,24 @@ const UseProducts = () => {
     const fetchProducts = useCallback(() => {
         dispatch({ type: actionTypes.SET_LOADING, payload: true });
         try {
-            fetch(
-                "https://s3.eu-west-2.amazonaws.com/techassessment.cognitoedu.org/products.json"
-            )
-                .then((response) => response.json())
-                .then((data) => {
-                    dispatch({ type: actionTypes.SET_PRODUCTS, payload: data });
-                })
-                .catch((error) =>
-                    dispatch({
-                        type: actionTypes.SET_ERROR,
-                        payload: error.message,
+            startTransition(() => {
+                fetch(
+                    "https://s3.eu-west-2.amazonaws.com/techassessment.cognitoedu.org/products.json"
+                )
+                    .then((response) => response.json())
+                    .then((data) => {
+                        dispatch({
+                            type: actionTypes.SET_PRODUCTS,
+                            payload: data,
+                        });
                     })
-                );
+                    .catch((error) =>
+                        dispatch({
+                            type: actionTypes.SET_ERROR,
+                            payload: error.message,
+                        })
+                    );
+            });
         } catch (err) {
             dispatch({
                 type: actionTypes.SET_ERROR,

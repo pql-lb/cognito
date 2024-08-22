@@ -1,5 +1,12 @@
-import React, { useCallback, useState, useEffect } from "react";
-import { List } from "../molecules/List";
+import React, {
+    useCallback,
+    useState,
+    useEffect,
+    startTransition,
+    lazy,
+} from "react";
+import { Loader } from "../molecules/Loader";
+const List = lazy(() => import("../molecules/List"));
 // const [postsBackup, setBackupPosts] = useState([]);
 // const [hide, setHide] = useState(false);
 // const { filter } = useContext(Context);
@@ -15,7 +22,7 @@ import { List } from "../molecules/List";
 //         setPosts(newPosts);
 //     }
 // }, [filter]);
-export const ProductList = React.memo(({ products }) => {
+const ProductList = React.memo(({ products }) => {
     const [productsState, setProductsState] = useState([]);
     const [cursor, setCursor] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
@@ -23,18 +30,20 @@ export const ProductList = React.memo(({ products }) => {
     const PAGE_SIZE = 24;
 
     const fetchPosts = useCallback(async () => {
-        if (!hasMore) return;
+        if (!hasMore || isLoading) return;
         setIsLoading(true);
-        const nextCursor = cursor + PAGE_SIZE;
-        const splitArr = products.slice(cursor, nextCursor);
+        startTransition(() => {
+            const nextCursor = cursor + PAGE_SIZE;
+            const splitArr = products.slice(cursor, nextCursor);
 
-        setProductsState((prevPosts) => [...prevPosts, ...splitArr]);
-        setCursor(nextCursor);
-        if (nextCursor >= products.length) {
-            setHasMore(false);
-        }
+            setProductsState((prevPosts) => [...prevPosts, ...splitArr]);
+            setCursor(nextCursor);
+            if (nextCursor >= products.length) {
+                setHasMore(false);
+            }
 
-        setIsLoading(false);
+            setIsLoading(false);
+        });
     }, [cursor, products, productsState, hasMore]);
 
     const handleScroll = () => {
@@ -66,12 +75,10 @@ export const ProductList = React.memo(({ products }) => {
     return (
         <>
             <List products={productsState} />
-            {isLoading && <div>Loading...</div>}
-            {!hasMore && (
-                <p className="text-text opacity-50 text-center text-sm">
-                    End of products.
-                </p>
-            )}
+            {isLoading && <Loader />}
+            {!hasMore && <></>}
         </>
     );
 });
+
+export default ProductList;

@@ -8,7 +8,7 @@ export const Button = ({
     return (
         <button
             data-testid={dataTestid}
-            className={className}
+            className={`button ${className ? className : ""}`}
             data-value={value ? value : null}
             onClick={handleClick}
         >

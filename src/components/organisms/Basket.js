@@ -5,6 +5,7 @@ import {
     actionTypes,
 } from "../../context/basket";
 import { BasketItem } from "../molecules/BasketItem";
+import { Button } from "../atoms/Button";
 
 export const Basket = React.memo(() => {
     const dispatch = useContext(BasketDispatchContext);
@@ -16,9 +17,11 @@ export const Basket = React.memo(() => {
     return (
         <>
             <div>
-                <button data-testid="cart" onClick={handleBasket}>
-                    Basket
-                </button>
+                <Button
+                    string={!open ? "Basket" : "Close"}
+                    handleClick={handleBasket}
+                    dataTestid={"cart"}
+                />
             </div>
         </>
     );

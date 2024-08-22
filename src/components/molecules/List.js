@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ProductCard } from "./ProductCard";
+import React, { lazy, useContext, useEffect, useState } from "react";
+const ProductCard = lazy(() => import("./ProductCard"));
 
-export const List = React.memo(({ products }) => {
+const List = React.memo(({ products }) => {
     return (
         <div className="list">
             {products.map((product) => {
@@ -10,3 +10,4 @@ export const List = React.memo(({ products }) => {
         </div>
     );
 });
+export default List;

@@ -1,8 +1,6 @@
 import "@testing-library/jest-dom";
-import React from "react";
+import React, { act } from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { actionTypes } from "../../src/context/basket";
-import { ProductCard } from "../components/molecules/ProductCard";
 import {
     MockBasketProvider,
     mockDispatch,
@@ -11,29 +9,35 @@ import {
 } from "./setupTests";
 import { Basket } from "../components/organisms/Basket";
 import { Aside } from "../components/organisms/Aside";
+import { actionTypes } from "../context/basket";
 
 describe("Cart Item Quantity", () => {
-    beforeEach(() => {
-        localStorage.clear();
-        const stateOpen2 = stateOpen.cart;
-        localStorage.setItem("cart", JSON.stringify({ cart: stateOpen2 }));
-    });
-
     test("test quantity is accurate when input is changed", async () => {
-        render(
-            <MockBasketProvider state={stateOpen}>
+        const { rerender } = render(
+            <MockBasketProvider state={state}>
+                <Basket />
+            </MockBasketProvider>
+        );
+
+        const button = screen.getByTestId("cart");
+        fireEvent.click(button);
+        const updatedState = {
+            ...state,
+            open: true,
+        };
+        rerender(
+            <MockBasketProvider state={updatedState}>
                 <Basket />
                 <Aside />
             </MockBasketProvider>
         );
 
-        const prod1 = screen.getByText("Product 1");
-        const prod1Input = prod1.closest("div").querySelector("input");
-        fireEvent.change(prod1Input, { target: { value: "5" } });
-        const btn = screen.getByTestId("change1");
-        fireEvent.click(btn);
-
         await waitFor(() => {
+            const prod1 = screen.getByText("Product 1");
+            const prod1Input = prod1.closest("div").querySelector("input");
+            fireEvent.change(prod1Input, { target: { value: "5" } });
+            const btn = screen.getByTestId("change1");
+            fireEvent.click(btn);
             expect(prod1Input.value).toBe("5");
 
             expect(mockDispatch).toHaveBeenCalledWith({

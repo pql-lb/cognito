@@ -1,8 +1,7 @@
-import { useContext } from "react";
+import { lazy, useContext } from "react";
 import UseProducts from "../../hooks/useProducts";
-import { ProductList } from "../organisms/ProductList";
 import { MainTemplate } from "../templates/MainTemplate";
-import { ProductsContext } from "../../context/products";
+const ProductList = lazy(() => import("../organisms/ProductList"));
 
 const Products = () => {
     const { products, isLoading, error } = UseProducts();

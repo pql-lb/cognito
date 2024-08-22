@@ -1,39 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
 $wrapperMaxWidth: 1200px;
 $wrapperWidth: 90%;
 $headerHeight: 60px;
+$purple: rgb(111, 0, 255);
+$darkPurple: rgb(44, 0, 91);
 
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
 main {
     position: relative;
 }
 body {
     overflow-x: hidden;
+    font-family: "Open Sans", "sans serif";
+    background: linear-gradient(45deg, #8419ff3f, #1997ff3e);
 }
+
+.button {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    font-size: 0.8rem;
+    font-family: "Open Sans", "sans serif";
+    font-weight: 600;
+    background-color: rgb(44, 0, 91);
+    color: white;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    transition: all 0.4s ease;
+    &:hover {
+        background: $purple;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(198, 177, 229, 0.5);
+}
+::-webkit-scrollbar-track {
+    background-color: rgba(211, 205, 221, 0.5);
+}
+
+.footer {
+    background: $darkPurple;
+    padding: 1rem
+        max(
+            calc((100% - $wrapperMaxWidth) / 2),
+            calc((100% - $wrapperWidth) / 2)
+        );
+    width: 100%;
+    color: white;
+}
+
 .header {
     position: fixed;
     top: 0;
     width: 100%;
     height: $headerHeight;
     z-index: 30;
-    display: block;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
     &__nav {
         max-width: $wrapperMaxWidth;
         width: $wrapperWidth;
         margin: auto;
+        position: relative;
     }
     &__list {
         display: flex;
-        width: 100%;
+
         justify-content: flex-end;
     }
     &__item {
         position: relative;
         list-style: none;
+
+        width: fit-content;
         padding: 0.5rem 1rem;
+        a {
+            text-decoration: none;
+            color: $darkPurple;
+            transition: all 0.4 ease;
+            &:hover {
+                color: $purple;
+            }
+        }
     }
 }
 
 .aside {
-    position: absolute;
+    position: fixed;
     z-index: 20;
     right: 0;
     top: 0;
@@ -43,27 +106,72 @@ body {
     height: 100vh;
     transform: translateX(400px);
     transition: transform 0.4s ease;
+
+    ::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
     &--active {
         transform: translateX(0%);
     }
     &__inner {
-        padding: 5rem 1rem;
+        padding: 4rem 0 1rem;
         height: 100%;
-        max-height: calc(100vh - 10rem);
         overflow-y: auto;
+        position: relative;
+        width: 360px;
     }
+
     &__item {
-        padding: 0 0 1rem 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 1rem 1rem 2rem 1rem;
         margin: 0 0 1rem 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        position: relative;
+        display: block;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
     }
     &__delete {
+        position: absolute;
+        right: 1rem;
+        background: transparent;
+        color: $darkPurple;
+        top: 0;
+        padding: 0;
+        font-size: 1.25rem;
+        &:hover {
+            background: transparent;
+            color: $purple;
+        }
     }
     &__title {
+        font-size: 1.25rem;
+        padding-right: 1rem;
+        margin: 0.5rem 0;
     }
     &__price {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
     }
     &__quantity {
+        display: flex;
+        width: 100%;
+        & > div {
+            margin-right: 0.5rem;
+            display: flex;
+            min-width: 0;
+        }
+        label {
+            font-weight: 600;
+            padding-right: 0.5rem;
+            flex-shrink: 0;
+        }
+        input {
+            width: 100%;
+            flex-shrink: 1;
+        }
     }
     &__input {
     }
@@ -73,19 +181,83 @@ body {
 
 .list {
     display: grid;
+    max-width: $wrapperMaxWidth;
+    width: $wrapperWidth;
+    margin: auto;
     padding-top: 2rem;
-    margin-top: $headerHeight;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    margin: $headerHeight auto 2rem auto;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem 1rem;
     &__item {
-        margin-bottom: 50px;
+        padding: 1rem 2rem 2rem;
+        border-radius: 0.75rem;
+        background-color: rgba(255, 255, 255, 0.8);
     }
     &__title {
+        font-size: 1.5rem;
+        margin: 1rem 0;
     }
     &__description {
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
     &__price {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
     }
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        a {
+            color: $purple;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.4s ease;
+            &:hover {
+                color: black;
+            }
+        }
+    }
+
     &__cart {
+    }
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.loader {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productDetail {
+    min-height: calc(100vh - $headerHeight + 0.4rem);
+    width: $wrapperWidth;
+    height: 100%;
+    max-width: $wrapperMaxWidth;
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__inner {
+        background: transparent;
+        .list__buttons {
+            a {
+                display: none;
+            }
+        }
     }
 }

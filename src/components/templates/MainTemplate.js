@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 import { Header } from "../organisms/Header";
+import { Footer } from "../organisms/Footer";
 
 export const MainTemplate = ({ children }) => {
     return (
         <>
             <Header />
-            <main>{children}</main>
-            <footer>
-                <p>&copy; 2024 My Supermarket</p>
-            </footer>
+            <main className="main">{children}</main>
+            <Footer />
         </>
     );
 };

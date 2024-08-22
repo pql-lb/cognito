@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React, { lazy, useContext } from "react";
 import { BasketContext, BasketDispatchContext } from "../../context/basket";
-import { BasketItem } from "../molecules/BasketItem";
-
+const BasketItem = lazy(() => import("../molecules/BasketItem"));
 export const Aside = React.memo(() => {
     const { open, cart } = useContext(BasketContext);
     return (

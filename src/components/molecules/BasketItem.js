@@ -3,7 +3,7 @@ import { formatPrice } from "../../utils/format";
 import { Button } from "../atoms/Button";
 import { BasketDispatchContext, actionTypes } from "../../context/basket";
 
-export const BasketItem = React.memo(({ product, index }) => {
+const BasketItem = React.memo(({ product, index }) => {
     const dispatch = useContext(BasketDispatchContext);
     const [input, setInput] = useState(Number(product.count));
     const handleClick = useCallback(
@@ -26,23 +26,33 @@ export const BasketItem = React.memo(({ product, index }) => {
     }, [input]);
     return (
         <div className="aside__item" id={product.id}>
-            <Button value={product.id} handleClick={handleClick} string="X" />
+            <Button
+                className={"aside__delete"}
+                value={product.id}
+                handleClick={handleClick}
+                string="X"
+            />
             <h2 className="aside__title">{product.name}</h2>
             <p className="aside__price">{formatPrice(product.price)}</p>
             <div className="aside__quantity">
-                Quantity:
-                <input
-                    className="aside__input"
-                    type="number"
-                    value={input}
-                    onChange={(e) => setInput(Number(e.target.value))}
-                />
+                <div>
+                    <label htmlFor="quantity"> Quantity:</label>
+                    <input
+                        id="quantity"
+                        className="aside__input"
+                        type="number"
+                        value={input}
+                        onChange={(e) => setInput(Number(e.target.value))}
+                    />
+                </div>
                 <Button
                     dataTestid={"change" + product.id}
                     handleClick={handleChange}
                     string="Update"
+                    className={"aside__change"}
                 />
             </div>
         </div>
     );
 });
+export default BasketItem;

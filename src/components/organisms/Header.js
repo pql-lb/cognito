@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Basket } from "./Basket";
 import { Aside } from "./Aside";
@@ -12,9 +12,7 @@ export const Header = React.memo(() => {
                         <li className="header__item">
                             <Link to="/">Products</Link>
                         </li>
-                        <li className="header__item">
-                            <Link to="/product">Product</Link>
-                        </li>
+
                         <li className="header__item">
                             <Basket />
                         </li>
