@@ -1,18 +1,5 @@
 @import "./variables.scss";
-
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-main {
-    position: relative;
-}
-body {
-    overflow-x: hidden;
-    font-family: "Open Sans", "sans serif";
-    background: linear-gradient(45deg, #8419ff3f, #1997ff3e);
-}
+@import "./globals.scss";
 
 .button {
     padding: 0.25rem 0.5rem;
@@ -29,16 +16,6 @@ body {
     &:hover {
         background: $purple;
     }
-}
-
-::-webkit-scrollbar {
-    width: 12px;
-}
-::-webkit-scrollbar-thumb {
-    background-color: rgba(198, 177, 229, 0.5);
-}
-::-webkit-scrollbar-track {
-    background-color: rgba(211, 205, 221, 0.5);
 }
 
 .footer {

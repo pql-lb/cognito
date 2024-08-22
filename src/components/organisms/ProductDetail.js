@@ -1,5 +1,4 @@
 import React from "react";
-import { formatPrice } from "../../utils/format";
 import ProductCard from "../molecules/ProductCard";
 
 const ProductDetail = React.memo(({ product }) => {

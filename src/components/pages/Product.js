@@ -1,6 +1,5 @@
 import { lazy, useContext, useEffect, useState } from "react";
 import { MainTemplate } from "../templates/MainTemplate";
-import { ProductsContext } from "../../context/products";
 import { useParams } from "react-router-dom";
 import UseProducts from "../../hooks/useProducts";
 const ProductDetail = lazy(() => import("../organisms/ProductDetail"));

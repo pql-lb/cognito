@@ -8,6 +8,7 @@ import React, {
 import { Loader } from "../molecules/Loader";
 const List = lazy(() => import("../molecules/List"));
 
+// Component simulates lazy loading and displaying a paginated list of products with infinite scrolling
 const ProductList = React.memo(({ products }) => {
     const [productsState, setProductsState] = useState([]);
     const [cursor, setCursor] = useState(0);
