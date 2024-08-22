@@ -1,10 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-
-$wrapperMaxWidth: 1200px;
-$wrapperWidth: 90%;
-$headerHeight: 60px;
-$purple: rgb(111, 0, 255);
-$darkPurple: rgb(44, 0, 91);
+@import "./variables.scss";
 
 * {
     box-sizing: border-box;
@@ -48,6 +42,9 @@ body {
 }
 
 .footer {
+    height: $headerHeight;
+    display: flex;
+    align-items: center;
     background: $darkPurple;
     padding: 1rem
         max(
@@ -185,6 +182,7 @@ body {
     width: $wrapperWidth;
     margin: auto;
     padding-top: 2rem;
+    min-height: calc(100vh - ($headerHeight * 2) - 2rem);
     margin: $headerHeight auto 2rem auto;
     grid-template-columns: repeat(1, 1fr);
     gap: 2rem 1rem;
@@ -234,11 +232,31 @@ body {
 .loader {
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     background: rgba(255, 255, 255, 0.5);
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    &__inner {
+        width: 48px;
+        height: 48px;
+        border: 5px solid #fff;
+        border-bottom-color: #064692;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    }
 }
 
 .productDetail {

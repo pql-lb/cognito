@@ -7,21 +7,7 @@ import React, {
 } from "react";
 import { Loader } from "../molecules/Loader";
 const List = lazy(() => import("../molecules/List"));
-// const [postsBackup, setBackupPosts] = useState([]);
-// const [hide, setHide] = useState(false);
-// const { filter } = useContext(Context);
-// useEffect(() => {
-//     setPosts(postsBackup);
-//     setHide(false);
-//     if (filter.length) {
-//         setHide(true);
-//         const newPosts = postsBackup.filter((post) => {
-//             const tags = post.metadata.tags || [];
-//             return tags.some((tag) => tag.sys.id === filter);
-//         });
-//         setPosts(newPosts);
-//     }
-// }, [filter]);
+
 const ProductList = React.memo(({ products }) => {
     const [productsState, setProductsState] = useState([]);
     const [cursor, setCursor] = useState(0);
@@ -75,7 +61,7 @@ const ProductList = React.memo(({ products }) => {
     return (
         <>
             <List products={productsState} />
-            {isLoading && <Loader />}
+            {isLoading && <Loader bg={false} />}
             {!hasMore && <></>}
         </>
     );

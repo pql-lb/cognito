@@ -1,9 +1,12 @@
 import React from "react";
 
-export const Loader = React.memo(() => {
+export const Loader = React.memo(({ bg }) => {
     return (
-        <div className="loader">
-            <div>Loading...</div>
+        <div
+            className="loader"
+            style={!bg ? { background: "transparent" } : {}}
+        >
+            <span className="loader__inner"></span>
         </div>
     );
 });
