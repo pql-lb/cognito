@@ -5,7 +5,9 @@ const ProductList = lazy(() => import("../organisms/ProductList"));
 
 const Products = () => {
     const { products, isLoading, error } = UseProducts();
-
+    // if (true) {
+    //     throw new Error("Test Error");
+    // }
     return (
         <MainTemplate>
             {products && <ProductList products={products} />}
